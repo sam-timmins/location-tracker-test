@@ -17,6 +17,13 @@ const startTimer = (longitudeGps, latitudeGps) => {
 
       gpsCapture.lng = longitudeGps
       gpsCapture.lat = latitudeGps
+
+      const longRef = document.createElement("p");
+      const latRef = document.createElement("p");
+      document.body.appendChild(longRef)
+      document.body.appendChild(latRef)
+      longRef.innerHTML = `Long ${longitudeGps}`
+      latRef.innerHTML = `Lat ${latitudeGps}`
   
       gpsLog.push(gpsCapture)
       console.log(gpsLog)
