@@ -1,11 +1,12 @@
 const detailsRef = document.querySelector('#details')
 const timerRef = document.querySelector('#timer');
 const gpsLogRef = document.querySelector('#gps-log');
+const mapRef = document.querySelector('#map');
 
 const gpsLog = []
 
 
-let sec = 3;
+let sec = 10;
 
 function countdownTimer() {
 
@@ -13,7 +14,7 @@ function countdownTimer() {
       timerRef.innerHTML = +sec;
       sec--;
       if (sec === 0) {
-        sec = 3
+        sec = 10
         timerRef.innerHTML = 'Location Point Added'
         clearTimer()
         gpsCapture()
@@ -33,7 +34,7 @@ function gpsCapture(){
 
     gpsLog.push(gpsCapture)
 
-    gpsLog.forEach(addPinsToMap)
+    gpsLog.forEach(initMap)
   
   })
   
@@ -46,8 +47,30 @@ function clearTimer(){
 
 
 function addPinsToMap(value){
+  lat = value.latitude
+  long = value.longitude
   // gpsLogRef.innerHTML += 'Lat: ' +value.latitude+ ' | Long: ' +value.longitude + '<br>'
+  
 }
 
 countdownTimer()
 
+function initMap() {
+  // const latLong = addPinsToMap()
+  const myLatLng = { lat: gpsCapture.latitude, lng: gpsCapture.longitude };
+
+  const map = new google.maps.Map(
+    mapRef,
+    {
+      zoom: 17,
+      center: myLatLng,
+    }
+  );
+
+  new google.maps.Marker({
+    position: myLatLng,
+    map,
+    title: "Hello World!",
+  });
+}
+window.initMap = initMap;
