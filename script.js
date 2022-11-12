@@ -62,8 +62,9 @@ function initMap() {
   const map = new google.maps.Map(
     mapRef,
     {
-      zoom: 17,
+      zoom: 19,
       center: myLatLng,
+      mapTypeId: 'satellite'
     }
   );
 
